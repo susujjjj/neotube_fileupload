@@ -64,23 +64,23 @@ function VideoUploadPage(props) {
                 if (response.data.success) {
                     console.log(response.data , "response.data")
 
-                    // let variable = {
-                    //     filePath: response.data.filePath,
-                    //     fileName: response.data.fileName
-                    // }
-                    // setFilePath(response.data.filePath)
+                    let variable = {
+                        url: response.data.,
+                        fileName: response.data.fileName
+                    }
+                    // setFilePath(resp onse.data.filePath)
 
                     // //gerenate thumbnail with this filepath ! 
 
-                    // axios.post('/api/video/thumbnail', variable)
-                    //     .then(response => {
-                    //         if (response.data.success) {
-                    //             setDuration(response.data.fileDuration)
-                    //             setThumbnail(response.data.thumbsFilePath)
-                    //         } else {
-                    //             alert('Failed to make the thumbnails');
-                    //         }
-                    //     })
+                    Axios.post('/api/video/thumbnail', variable)
+                        .then(response => {
+                            if (response.data.success) {
+                                // setDuration(response.data.fileDuration)
+                                // setThumbnail(response.data.thumbsFilePath)
+                            } else {
+                                alert('Failed to make the thumbnails');
+                            }
+                        })
 
 
                 } else {
