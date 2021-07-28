@@ -65,7 +65,7 @@ function VideoUploadPage(props) {
                     console.log(response.data , "response.data")
 
                     let variable = {
-                        url: response.data.,
+                        url: response.data.url,
                         fileName: response.data.fileName
                     }
                     // setFilePath(resp onse.data.filePath)
