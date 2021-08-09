@@ -115,13 +115,12 @@ function VideoUploadPage(props) {
 
                   setTimeout(() => {
                     props.history.push("/");
-                  }, 2000);
+                  }, 1500);
                   
               } else {
                   alert('Failed to upload video')
               }
           })
-
   }
 
   return (

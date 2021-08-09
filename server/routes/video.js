@@ -48,8 +48,8 @@ router.post("/uploadVideo", (req, res) => {
   video.save((err, doc) => { //이렇게하면 모든 정보들이 몽고디비에 저장된다.
     if (err) return res.json({ success : false, err })
     res.status(200).json({ success: true })
-
   })
+  
 })
 
 router.post("/thumbnail", (req, res) => {
