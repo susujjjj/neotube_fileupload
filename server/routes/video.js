@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Video } = require("../models/Video");
-
-const { auth } = require("../middleware/auth");
 const multer = require("multer");
 var ffmpeg = require("fluent-ffmpeg");
+
+const { Video } = require("../models/Video");
+// const { Subscriber } = require("../models/Subscriber");
+const { auth } = require("../middleware/auth");
+
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -52,6 +54,7 @@ router.post("/uploadVideo", (req, res) => {
   
 })
 
+
 router.post("/thumbnail", (req, res) => {
   let filePath = "";
   let fileDuration = "";
@@ -62,6 +65,7 @@ router.post("/thumbnail", (req, res) => {
 
     fileDuration = metadata.format.duration;
   });
+
 
   //썸네일생성
   ffmpeg(req.body.url)
@@ -91,6 +95,31 @@ router.post("/thumbnail", (req, res) => {
       filename: "thumbnail-%b.png",
     });
 });
+
+
+router.get("/getVideos", (req, res) => {
+  Video.find()
+    .populate("writer")
+    .exec((err, videos) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, videos });
+    });
+});
+
+
+// router.post("/getVideos", (req, res) => {
+//   //비디오를 db에서 가져와서 클라이언트로 보낸다
+//   Video.find()
+//     .populate('writer') 
+//     //populate을 해줘야지 모든 writer정보를 가져올 수 있습니다. 
+//     //만약 populate해주지않으면 writer의 id만 가져올수있다 
+//     .exec((err, videos) => {
+//       if (err) return res.status(400).send(err);
+//       res.status(200).json({success: true, videos})
+//     })
+
+// });
+
 
 module.exports = router;
 
