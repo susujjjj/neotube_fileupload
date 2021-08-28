@@ -7,7 +7,6 @@ const { Video } = require("../models/Video");
 // const { Subscriber } = require("../models/Subscriber");
 const { auth } = require("../middleware/auth");
 
-
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -54,6 +53,14 @@ router.post("/uploadVideo", (req, res) => {
   
 })
 
+router.post("/getVideo", (req, res) => {
+  Video.findOne({ "_id": req.body.videoId })
+    .populate('writer')
+    .exec((err, video) => {
+      if(err) return res.status(400).send(err)
+      return res.status(200).json({ success : true, video}) //videoDetail정보를 클라이언트로 보내기  
+    }) //callback function이 error와 비디오 정보들
+});
 
 router.post("/thumbnail", (req, res) => {
   let filePath = "";

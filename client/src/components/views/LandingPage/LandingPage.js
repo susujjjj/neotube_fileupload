@@ -11,7 +11,7 @@ function LandingPage() {
 
     const [Video, setVideo] = useState([])
 
-    useEffect(() => {
+    useEffect(() => { //useEffect는 돔이 로드되자마자 무엇을한번 할것인지 
 
         Axios.get('/api/video/getVideos')
         .then(response => {
@@ -34,17 +34,25 @@ function LandingPage() {
 
         return (
           <Col lg={6} md={8} xs={24}>
-              <a href={`/video/post/${video._id}`}>
-                  <div style={{position: 'relative'}}>
-                      <img style={{width: '100%'}} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail img" />
-                      <div className="duration">
-                          <span>{minutes}: {seconds}</span>
-                      </div>
+            <div style={{ position: "relative" }}>
+              <a href={`/video/${video._id}`}>
+                <div style={{ position: "relative" }}>
+                  <img
+                    style={{ width: "100%" }}
+                    src={`http://localhost:5000/${video.thumbnail}`}
+                    alt="thumbnail img"
+                  />
+                  <div className="duration">
+                    <span>
+                      {minutes}: {seconds}
+                    </span>
                   </div>
+                </div>
               </a>
               <br />
-            <div style={{ position: "relative" }}>
-              <div className="duration"></div>
+              <div style={{ position: "relative" }}>
+                <div className="duration"></div>
+              </div>
             </div>
             <br />
             <Meta
@@ -54,7 +62,9 @@ function LandingPage() {
             />
             <span>{video.writer.name}</span>
             <br />
-            <span style={{ marginLeft: "3rem" }}>{video.views} views</span>-{" "}
+            <span style={{ marginLeft: "3rem" }}>
+              {video.views} views
+            </span>-{" "}
             <span> {moment(video.createdAt).format("MMM Do YY")} </span>
           </Col>
         );
