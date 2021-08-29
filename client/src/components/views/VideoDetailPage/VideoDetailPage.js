@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, List, Avatar } from 'antd';
 import Axios from 'axios';
 import SideVideo from './Sections/SideVideo';
+import Subscribe from './Sections/Subscribe';
 
 function VIdeoDetailPage(props) {
 
@@ -41,7 +42,8 @@ function VIdeoDetailPage(props) {
               controls
             />
             {/*like dislike  */}
-            <List.Item actions>
+            {/*subscriber만을 위한 컴포넌트만들기 */}
+            <List.Item actions={[<Subscribe userTo={Video.writer}/>]}> 
               <List.Item.Meta
                 avatar={<Avatar src={Video.writer && Video.writer.image} />}
                 title={<a href="https://ant.design">{Video.title}</a>}
