@@ -12,7 +12,6 @@ function LandingPage() {
     const [Video, setVideo] = useState([])
 
     useEffect(() => { //useEffect는 돔이 로드되자마자 무엇을한번 할것인지 
-
         Axios.get('/api/video/getVideos')
         .then(response => {
             if (response.data.success) {

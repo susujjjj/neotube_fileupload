@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, List, Avatar } from 'antd';
 import Axios from 'axios';
+import SideVideo from './Sections/SideVideo';
 
 function VIdeoDetailPage(props) {
 
@@ -35,7 +36,7 @@ function VIdeoDetailPage(props) {
         <Col lg={18} xs={24}>
           <div style={{ width: "100%", padding: "3rem 4rem" }}>
             <video
-              style={{ width: "100%" }}
+              style={{ width: "100%" }} 
               src={`http://localhost:5000/${Video.filePath}`}
               controls
             />
@@ -52,7 +53,7 @@ function VIdeoDetailPage(props) {
           </div>
         </Col>
         <Col lg={6} xs={24}>
-          Side Videos
+          <SideVideo />
         </Col>
       </Row>
     );
