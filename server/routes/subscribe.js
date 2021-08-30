@@ -40,4 +40,30 @@ router.post("/subscribed", (req, res) => {
 });
 
 
+router.post("/unsubscribe", (req, res) => {
+  //Subscriber 콜렉션에 userTo와 userFrom이 담겨있는데 그걸 찾아서 없애줘야함 
+  Subscriber.findOneAndDelete({
+    userTo: req.body.userTo,
+    userFrom: req.body.userFrom,
+  }).exec((err, doc) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, doc });
+  });
+});
+
+
+router.post("/subscribe", (req, res) => {
+
+  //userTo와 userFrom 을 저장해야됨
+  const subscribe= new Subscriber(req.body) //인스턴스만들기. 인스턴스에다가 모든 불러온 정보들 가져오기 
+  subscribe.save((err, doc)=> {
+    if (err) return res.json({ success: false, err })
+    res.status(200).json({ success: true })
+  })
+
+});
+
+
+
+
 module.exports = router;

@@ -43,7 +43,7 @@ function VIdeoDetailPage(props) {
             />
             {/*like dislike  */}
             {/*subscriber만을 위한 컴포넌트만들기 */}
-            <List.Item actions={[<Subscribe userTo={Video.writer}/>]}> 
+            <List.Item actions={[<Subscribe userTo={Video.writer} userFrom={localStorage.getItem('userId')}/>]}> 
               <List.Item.Meta
                 avatar={<Avatar src={Video.writer && Video.writer.image} />}
                 title={<a href="https://ant.design">{Video.title}</a>}
