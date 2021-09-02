@@ -4,7 +4,7 @@ const multer = require("multer");
 var ffmpeg = require("fluent-ffmpeg");
 
 const { Video } = require("../models/Video");
-// const { Subscriber } = require("../models/Subscriber");
+const { Subscriber } = require("../models/Subscriber"); // subscriber 모델 import하기 
 const { auth } = require("../middleware/auth");
 
 var storage = multer.diskStorage({
@@ -113,19 +113,28 @@ router.get("/getVideos", (req, res) => {
     });
 });
 
+router.post('/getSubscriptionVideos' , (req, res) => {
+    Subscriber.find({ userFrom: req.body.userFrom }).exec(
+      (err, subscriberInfo) => {
+        if (err) return res.status(400).send(err);
 
-// router.post("/getVideos", (req, res) => {
-//   //비디오를 db에서 가져와서 클라이언트로 보낸다
-//   Video.find()
-//     .populate('writer') 
-//     //populate을 해줘야지 모든 writer정보를 가져올 수 있습니다. 
-//     //만약 populate해주지않으면 writer의 id만 가져올수있다 
-//     .exec((err, videos) => {
-//       if (err) return res.status(400).send(err);
-//       res.status(200).json({success: true, videos})
-//     })
+        let subscribedUser = [];
 
-// });
+        subscriberInfo.map((subscriber, i) => {
+          subscribedUser.push(subscriber, userTo);
+        })
+
+        //찾은 사람들읭 비디오를 가지고 온다.
+        Video.find({ writer : { $in: subscribedUser} })
+        .populate('writer')
+        .exec((err, videos)=> {
+          if(err) return res.status(400).send(err);
+          res.status(200).json({ success: true, videos })
+        })
+      }
+    );
+
+})
 
 
 module.exports = router;
