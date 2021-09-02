@@ -53,7 +53,7 @@ function VIdeoDetailPage(props) {
             {/*like dislike  */}
             {/*subscriber만을 위한 컴포넌트만들기 */}
             <List.Item
-            actions={[ subscribeButton]}
+              actions={[subscribeButton]}
               // actions={[
               //   <Subscribe
               //     userTo={Video.writer && Video.writer._id}
@@ -69,14 +69,14 @@ function VIdeoDetailPage(props) {
             </List.Item>
 
             {/* Comments */}
-            <Comment />
+            <Comment postId={videoId} />
           </div>
         </Col>
         <Col lg={6} xs={24}>
           <SideVideo />
         </Col>
       </Row>
-    )
+    );
   } else {
     return <div>Loading...</div>;
   }
